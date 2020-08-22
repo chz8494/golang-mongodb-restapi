@@ -1,14 +1,14 @@
 package controllers
 
 import (
-	"config"
 	"context"
 	"encoding/json"
-	"models"
 	"net/http"
 	"time"
 
-	"gopkg.in/go-playground/validator.v9"
+	"github.com/brittaj/golang-mongodb-restapi/config"
+	"github.com/brittaj/golang-mongodb-restapi/gopkg.in/go-playground/validator.v9"
+	"github.com/brittaj/golang-mongodb-restapi/models"
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
@@ -29,6 +29,7 @@ func CreateArticle(response http.ResponseWriter, request *http.Request) {
 	json.NewDecoder(request.Body).Decode(&article)
 
 	//validation for empty fields
+
 	validate := validator.New()
 
 	err := validate.Struct(article)
