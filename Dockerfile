@@ -12,7 +12,7 @@ RUN go get go.mongodb.org/mongo-driver/bson
 RUN go get github.com/gorilla/mux
 RUN go get go.mongodb.org/mongo-driver/bson/primitive
 RUN go get github.com/stretchr/testify/assert
-RUN go get go get gopkg.in/mgo.v2/dbtest
+RUN go get gopkg.in/mgo.v2/dbtest
 
 # Install api binary globally within container 
 RUN go install github.com/brittaj/golang-mongodb-restapi
