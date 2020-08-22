@@ -4,12 +4,18 @@ Rest API using GoLang and MongoDB
 # How to run the application in local
 
 install golang
+
 install mongodb
+
 create db go-mongo
+
 create collection articles
-git clone the repo to the installed go dir
-cd to the root dir
-run go run main.go
+
+git clone the repo to the installed go dir (Eg: /c/Users/jaison/go/src)
+
+cd to the root dir (Eg: /c/Users/jaison/go/src/golang-mongodb-restapi)
+
+Run the go command >> go run main.go
 
 # API details
 
@@ -36,7 +42,9 @@ Check for id and throw error for invalid id
 
  Unit Test created for:
  CreateArtice TestCreateArticle
+
  GetArticle TestGetArticle
+ 
  GetArticles TestGetArticles
 
  # Docker
