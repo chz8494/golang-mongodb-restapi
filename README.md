@@ -13,6 +13,8 @@ run go run main.go
 
 # API details
 
+Port: 8081
+
 http://localhost:8081/api/articles [GET]
 For listing all the articles
 
