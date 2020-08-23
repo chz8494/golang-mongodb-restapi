@@ -15,6 +15,8 @@ git clone the repo to the installed go dir (Eg: /c/Users/jaison/go/src)
 
 cd to the root dir (Eg: /c/Users/jaison/go/src/golang-mongodb-restapi)
 
+Run the go command >> go build
+
 Run the go command >> go run main.go
 
 # API details
