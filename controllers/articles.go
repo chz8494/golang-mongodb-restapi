@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/brittaj/golang-mongodb-restapi/config"
-	"github.com/brittaj/golang-mongodb-restapi/gopkg.in/go-playground/validator.v9"
 	"github.com/brittaj/golang-mongodb-restapi/models"
+	"gopkg.in/go-playground/validator.v9"
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
