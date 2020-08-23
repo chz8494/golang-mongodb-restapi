@@ -39,8 +39,9 @@ Check for id and throw error for invalid id
 
 # Unit Testing
  
- cd to controllers dir
- run go test -v
+ cd to controllers dir (Eg: cd /src/controller/)
+
+ Run the go command >> go test -v
 
  Unit Test created for:
  
