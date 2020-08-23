@@ -13,7 +13,7 @@ create collection articles
 
 git clone the repo to the installed go dir (Eg: /c/Users/jaison/go/src)
 
-cd to the root dir (Eg: /c/Users/jaison/go/src/golang-mongodb-restapi)
+cd to the root dir (Eg: /c/Users/jaison/go/src)
 
 Run the go command >> go build
 
