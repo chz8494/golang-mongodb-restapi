@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
-const uri = os.Getenv("MONGODB")
+var uri = os.Getenv("MONGODB")
 // ConnectDB : This is helper function to connect mongoDB
 func ConnectDB() *mongo.Collection {
 	clientOptions := options.Client().ApplyURI(uri)
