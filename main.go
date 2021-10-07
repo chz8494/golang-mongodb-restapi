@@ -16,7 +16,7 @@ func handleRequests() {
 	apiRouter.HandleFunc("/api/articles", controllers.CreateArticle).Methods("POST")
 	apiRouter.HandleFunc("/api/articles/", controllers.GetArticles).Methods("GET")
 	apiRouter.HandleFunc("/api/articles/{id}", controllers.GetArticle).Methods("GET")
-	log.Fatal(http.ListenAndServe(":80", apiRouter))
+	log.Fatal(http.ListenAndServe(":8081", apiRouter))
 }
 
 // entry point
