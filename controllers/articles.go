@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
-
+ "fmt"
 	"github.com/brittaj/golang-mongodb-restapi/config"
 	"github.com/brittaj/golang-mongodb-restapi/models"
 	"gopkg.in/go-playground/validator.v9"
@@ -76,7 +76,7 @@ func GetArticle(response http.ResponseWriter, request *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	//cancel to prevent memory leakage
 	defer cancel()
-
+	fmt.Println(collection.FindOne(ctx, models.Article{ID: id}))
 	//query the model
 	err := collection.FindOne(ctx, models.Article{ID: id}).Decode(&article)
 
@@ -95,7 +95,6 @@ func GetArticle(response http.ResponseWriter, request *http.Request) {
 func GetArticles(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 
-	var articles models.Articles
 
 	//set time out
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -104,7 +103,8 @@ func GetArticles(response http.ResponseWriter, request *http.Request) {
 
 	//query data
 	cursor, err := collection.Find(ctx, bson.M{})
-
+	var episodes []bson.M
+	err = cursor.All(ctx, &episodes)
 	//handle error
 	if err != nil {
 
@@ -112,22 +112,7 @@ func GetArticles(response http.ResponseWriter, request *http.Request) {
 		respond.With(response, request, http.StatusInternalServerError, data)
 		return
 	}
-	defer cursor.Close(ctx)
-
-	//loop through person
-	for cursor.Next(ctx) {
-		var article models.Article
-		cursor.Decode(&article)
-		articles = append(articles, article)
-	}
-
-	//handle error
-	if err := cursor.Err(); err != nil {
-		data := map[string]interface{}{"data": nil, "message": err.Error(), "status": http.StatusInternalServerError}
-		respond.With(response, request, http.StatusInternalServerError, data)
-		return
-	}
 	//handle success
-	data := map[string]interface{}{"data": articles, "message": "Success", "status": http.StatusOK}
+	data := map[string]interface{}{"data": episodes, "message": "Success", "status": http.StatusOK}
 	respond.With(response, request, http.StatusOK, data)
 }
