@@ -111,7 +111,7 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 	collection := database.Collection(params["coin"])
 	defer cancel()
 	//query the model
-	err := collection.FindOne(ctx, models.Coin{Timestamp: t}).Decode(&coin)
+	err = collection.FindOne(ctx, models.Coin{Timestamp: t}).Decode(&coin)
 
 	//handle error
 	if err != nil {
