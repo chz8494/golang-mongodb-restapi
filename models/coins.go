@@ -14,9 +14,9 @@ type Coin struct {
 	ID           primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Timestamp    int64              `json:"timestam,omitempty" bson:"timestam,omitempty" validate:"required"`
 	Price        float64            `json:"price,omitempty" bson:"price,omitempty" validate:"required"`
-	Initialprice string             `json:"price,omitempty" bson:"price,omitempty" validate:"required"`
-	High         string             `json:"price,omitempty" bson:"price,omitempty" validate:"required"`
-	Low          string             `json:"price,omitempty" bson:"price,omitempty" validate:"required"`
+	Initialprice string             `json:"initialprice,omitempty" bson:"price,omitempty" validate:"required"`
+	High         string             `json:"high,omitempty" bson:"price,omitempty" validate:"required"`
+	Low          string             `json:"low,omitempty" bson:"price,omitempty" validate:"required"`
 /*
 	Title   string             `json:"title,omitempty" bson:"title,omitempty" validate:"required"`
 	Content string             `json:"content,omitempty" bson:"content,omitempty" validate:"required"`
