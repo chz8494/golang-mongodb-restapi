@@ -11,12 +11,15 @@ import (
 
 //handle API Requests
 func handleRequests() {
-
+        port := os.Getenv("PORT")
+        if port == "" {
+             port = "8081"
+        }
 	apiRouter := mux.NewRouter().StrictSlash(true)
 	apiRouter.HandleFunc("/api/articles", controllers.CreateArticle).Methods("POST")
 	apiRouter.HandleFunc("/api/articles/", controllers.GetArticles).Methods("GET")
 	apiRouter.HandleFunc("/api/articles/{id}", controllers.GetArticle).Methods("GET")
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), apiRouter))
+	log.Fatal(http.ListenAndServe(":"+port, apiRouter))
 }
 
 // entry point
