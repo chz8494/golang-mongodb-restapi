@@ -64,8 +64,6 @@ func GetCoin(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 	//request params
 	params := mux.Vars(request)
-	var coin models.Coin
-
 	//set time out
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	//cancel to prevent memory leakage
@@ -77,7 +75,6 @@ func GetCoin(response http.ResponseWriter, request *http.Request) {
 	err = cursor.All(ctx, &coins)
 	//handle error
 	if err != nil {
-
 		data := map[string]interface{}{"data": nil, "message": err.Error(), "status": http.StatusInternalServerError}
 		respond.With(response, request, http.StatusInternalServerError, data)
 		return
@@ -104,7 +101,6 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 	}
 	*/
 	var coin models.Coin
-
 	//set time out
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	//cancel to prevent memory leakage
@@ -112,7 +108,6 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 	defer cancel()
 	//query the model
 	err = collection.FindOne(ctx, models.Coin{Timestamp: t}).Decode(&coin)
-
 	//handle error
 	if err != nil {
 		data := map[string]interface{}{"data": nil, "message": err.Error(), "status": http.StatusInternalServerError}
@@ -127,8 +122,6 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 //GetCoins : Get all coins
 func GetCoins(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
-
-
 	//set time out
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	//cancel to prevent memory leakage
@@ -140,7 +133,6 @@ func GetCoins(response http.ResponseWriter, request *http.Request) {
 	err = cursor.All(ctx, &collections)
 	//handle error
 	if err != nil {
-
 		data := map[string]interface{}{"data": nil, "message": err.Error(), "status": http.StatusInternalServerError}
 		respond.With(response, request, http.StatusInternalServerError, data)
 		return
