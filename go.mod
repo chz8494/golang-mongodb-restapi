@@ -1,4 +1,4 @@
-module github.com/brittaj/golang-mongodb-restapi
+module github.com/chz8494/golang-mongodb-restapi
 
 go 1.15
 
