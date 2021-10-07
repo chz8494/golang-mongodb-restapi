@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
  "fmt"
-	"github.com/brittaj/golang-mongodb-restapi/config"
-	"github.com/brittaj/golang-mongodb-restapi/models"
+	"github.com/chz8494/golang-mongodb-restapi/config"
+	"github.com/chz8494/golang-mongodb-restapi/models"
 	"gopkg.in/go-playground/validator.v9"
 
 	"github.com/gorilla/mux"

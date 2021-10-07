@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/brittaj/golang-mongodb-restapi/config"
+	"github.com/chz8494/golang-mongodb-restapi/config"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )

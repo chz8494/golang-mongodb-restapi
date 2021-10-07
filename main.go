@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/brittaj/golang-mongodb-restapi/controllers"
+	"github.com/chz8494/golang-mongodb-restapi/controllers"
 
 	"github.com/gorilla/mux"
 )
