@@ -19,20 +19,20 @@ import (
 // connect db
 var collection = config.ConnectDB()
 
-// CreateArticle : This is create article method
-func CreateArticle(response http.ResponseWriter, request *http.Request) {
+// CreateCoin : This is create coin method
+func CreateCoin(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 
-	var article models.Article
+	var coin models.Coin
 
 	// we decode our body request params
-	json.NewDecoder(request.Body).Decode(&article)
+	json.NewDecoder(request.Body).Decode(&coin)
 
 	//validation for empty fields
 
 	validate := validator.New()
 
-	err := validate.Struct(article)
+	err := validate.Struct(coin)
 
 	if err != nil {
 		data := map[string]interface{}{"data": nil, "message": err.Error(), "status": http.StatusInternalServerError}
@@ -45,7 +45,7 @@ func CreateArticle(response http.ResponseWriter, request *http.Request) {
 	defer cancel()
 
 	// insert our book model.
-	result, err := collection.InsertOne(ctx, article)
+	result, err := collection.InsertOne(ctx, coin)
 
 	if err != nil {
 		data := map[string]interface{}{"data": nil, "message": err.Error(), "status": http.StatusInternalServerError}
@@ -58,27 +58,27 @@ func CreateArticle(response http.ResponseWriter, request *http.Request) {
 
 }
 
-//GetArticle : Get article by id
-func GetArticle(response http.ResponseWriter, request *http.Request) {
+//GetCoin : Get coin by id
+func GetCoin(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 	//request params
 	params := mux.Vars(request)
 	//convert id to usable mongodb object id
-	id, errorID := primitive.ObjectIDFromHex(params["id"])
+	id, errorID := primitive.ObjectIDFromHex(params["Timestamp"])
 	if errorID != nil {
 		data := map[string]interface{}{"data": nil, "message": errorID.Error(), "status": http.StatusInternalServerError}
 		respond.With(response, request, http.StatusInternalServerError, data)
 		return
 	}
-	var article models.Article
+	var coin models.Coin
 
 	//set time out
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	//cancel to prevent memory leakage
 	defer cancel()
-	fmt.Println(collection.FindOne(ctx, models.Article{ID: id}))
+	fmt.Println(collection.FindOne(ctx, models.Coin{ID: id}))
 	//query the model
-	err := collection.FindOne(ctx, models.Article{ID: id}).Decode(&article)
+	err := collection.FindOne(ctx, models.Coin{ID: id}).Decode(&coin)
 
 	//handle error
 	if err != nil {
@@ -87,12 +87,12 @@ func GetArticle(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 	// handle success data
-	data := map[string]interface{}{"data": article, "message": "Success", "status": http.StatusOK}
+	data := map[string]interface{}{"data": coin, "message": "Success", "status": http.StatusOK}
 	respond.With(response, request, http.StatusOK, data)
 }
 
-//GetArticles : Get all articles
-func GetArticles(response http.ResponseWriter, request *http.Request) {
+//GetCoins : Get all coins
+func GetCoins(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 
 
