@@ -5,15 +5,14 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
- "fmt"
 	"github.com/chz8494/golang-mongodb-restapi/config"
 	"github.com/chz8494/golang-mongodb-restapi/models"
 	"gopkg.in/go-playground/validator.v9"
-
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	//"go.mongodb.org/mongo-driver/bson/primitive"
 	"gopkg.in/matryer/respond.v1"
+	"strconv"
 )
 
 // connect db
@@ -83,7 +82,7 @@ func GetCoin(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 	//handle success
-	data := map[string]interface{}{"data": episodes, "message": "Success", "status": http.StatusOK}
+	data := map[string]interface{}{"data": coins, "message": "Success", "status": http.StatusOK}
 	respond.With(response, request, http.StatusOK, data)
 }
 
@@ -91,6 +90,10 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 	//request params
 	params := mux.Vars(request)
+	t, err := strconv.ParseInt(params["timestamp"], 10, 64)
+	if err == nil {
+	    fmt.Printf("%d of type %T", t, t)
+	}
 	/*convert id to usable mongodb object id
 	id, errorID := primitive.ObjectIDFromHex(params["Timestamp"])
 	if errorID != nil {
@@ -107,7 +110,7 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 	collection := database.Collection(params["coin"])
 	defer cancel()
 	//query the model
-	err := collection.FindOne(ctx, models.Coin{Timestamp: params["timestamp"]}).Decode(&coin)
+	err := collection.FindOne(ctx, models.Coin{Timestamp: t}).Decode(&coin)
 
 	//handle error
 	if err != nil {
@@ -131,7 +134,7 @@ func GetCoins(response http.ResponseWriter, request *http.Request) {
 	defer cancel()
 
 	//query data
-	cursor, err := database.ListCollections(bgCtx, bson.D{})
+	cursor, err := database.ListCollections(ctx, bson.D{})
 	var collections []bson.M
 	err = cursor.All(ctx, &collections)
 	//handle error
@@ -142,6 +145,6 @@ func GetCoins(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 	//handle success
-	data := map[string]interface{}{"data": episodes, "message": "Success", "status": http.StatusOK}
+	data := map[string]interface{}{"data": collections, "message": "Success", "status": http.StatusOK}
 	respond.With(response, request, http.StatusOK, data)
 }
