@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
+	"fmt"
 	"github.com/chz8494/golang-mongodb-restapi/config"
 	"github.com/chz8494/golang-mongodb-restapi/models"
 	"gopkg.in/go-playground/validator.v9"
@@ -110,7 +111,7 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 	collection := database.Collection(params["coin"])
 	defer cancel()
 	//query the model
-	err := collection.FindOne(ctx, models.Coin{Timestamp: t}).Decode(&coin)
+	result,err := collection.FindOne(ctx, models.Coin{Timestamp: t}).Decode(&coin)
 
 	//handle error
 	if err != nil {
@@ -119,7 +120,7 @@ func GetCoin_Timestamp(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 	// handle success data
-	data := map[string]interface{}{"data": coin, "message": "Success", "status": http.StatusOK}
+	data := map[string]interface{}{"data": result, "message": "Success", "status": http.StatusOK}
 	respond.With(response, request, http.StatusOK, data)
 }
 
