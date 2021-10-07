@@ -25,4 +25,4 @@ type Coin struct {
 }
 
 //Articles of article
-type Coins []Article
+type Coins []Coin
