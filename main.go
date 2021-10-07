@@ -17,7 +17,8 @@ func handleRequests() {
 	apiRouter := mux.NewRouter().StrictSlash(true)
 	apiRouter.HandleFunc("/api/coins", controllers.CreateCoin).Methods("POST")
 	apiRouter.HandleFunc("/api/coins/", controllers.GetCoins).Methods("GET")
-	apiRouter.HandleFunc("/api/coins/{id}", controllers.GetCoin).Methods("GET")
+	apiRouter.HandleFunc("/api/coins/{coin}", controllers.GetCoin).Methods("GET")
+	apiRouter.HandleFunc("/api/coins/{coin}/{timestamp}", controllers.GetCoin_Timestamp).Methods("GET")
 	log.Fatal(http.ListenAndServe(":"+port, apiRouter))
 }
 

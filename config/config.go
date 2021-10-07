@@ -12,7 +12,7 @@ import (
 )
 var uri = os.Getenv("MONGODB")
 // ConnectDB : This is helper function to connect mongoDB
-func ConnectDB() *mongo.Collection {
+func ConnectDB() *mongo.Database {
 	clientOptions := options.Client().ApplyURI(uri)
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)
@@ -23,9 +23,9 @@ func ConnectDB() *mongo.Collection {
 
 	fmt.Println("Connected to MongoDB!")
 
-	collection := client.Database("price_per_min").Collection("BTC|WOW")
+	database := client.Database("price_per_min")
 
-	return collection
+	return database
 }
 
 // ErrorResponse : This is error model.
