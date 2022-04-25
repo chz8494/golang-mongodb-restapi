@@ -4,13 +4,15 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
-	"net/http"
-  "os"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"log"
+	"net/http"
 )
-var uri = os.Getenv("MONGODB")
+
+//var uri = os.Getenv("MONGODB")
+const uri = "mongodb+srv://reader:123sqwert@cluster0.1lq0k.mongodb.net/price?retryWrites=true&w=majority"
+
 // ConnectDB : This is helper function to connect mongoDB
 func ConnectDB() *mongo.Database {
 	clientOptions := options.Client().ApplyURI(uri)
