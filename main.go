@@ -21,7 +21,7 @@ func handleRequests() {
 	apiRouter.HandleFunc("/api/coins/{coin}", controllers.GetCoin).Methods("GET")
 	apiRouter.HandleFunc("/api/coins/{coin}/{timestamp}", controllers.GetCoin_Timestamp).Methods("GET")
 	corsObj := handlers.AllowedOrigins([]string{"*"})
-	log.Fatal(http.ListenAndServe(":"+port, handlers.CORS(corsObj)(apiRouter))
+	log.Fatal(http.ListenAndServe(":"+port, handlers.CORS(corsObj)(apiRouter)))
 }
 
 // entry point
