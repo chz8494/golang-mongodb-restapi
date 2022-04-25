@@ -10,8 +10,7 @@ import (
 	"net/http"
 )
 
-//var uri = os.Getenv("MONGODB")
-const uri = "mongodb+srv://reader:123sqwert@cluster0.1lq0k.mongodb.net/price?retryWrites=true&w=majority"
+var uri = os.Getenv("MONGODB")
 
 // ConnectDB : This is helper function to connect mongoDB
 func ConnectDB() *mongo.Database {
